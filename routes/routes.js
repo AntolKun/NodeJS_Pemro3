@@ -1,6 +1,8 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const Mahasiswa = require("../models/Mahasiswa");
 const Dosen = require("../models/Dosen");
+const User = require("../models/User");
 const router = express.Router();
 
 router.get("/getMahasiswa", async (req, res) => {
@@ -124,6 +126,56 @@ router.delete("/deleteDosen/:id", async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+});
+
+// Register route
+router.post("/register", async (req, res) => {
+  const { nama, email, password } = req.body;
+
+  if (!nama || !email || !password) {
+    return res
+      .status(400)
+      .json({ message: "Nama, email, and password are required" });
+  }
+
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already in use" });
+    }
+
+    const newUser = new User({ nama, email, password });
+    await newUser.save();
+
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred", error });
+  }
+});
+
+// route login
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: "Email and password are required" });
+  }
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    res.status(200).json({ message: "Login successful", user });
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred", error });
   }
 });
 

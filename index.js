@@ -6,7 +6,7 @@ app.use(express.json());
 
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://0.0.0.0:27017/belajar_mongodb2");
+mongoose.connect("mongodb://0.0.0.0:27017/pemro3");
 const database = mongoose.connection;
 
 database.on("error", (error) => {

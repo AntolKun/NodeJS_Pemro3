@@ -3,7 +3,8 @@
 		"_postman_id": "4d1b9c13-536e-40dc-99ea-04b36bfde5cf",
 		"name": "Pemrograman 3 - NodeJS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15290749"
+		"_exporter_id": "15290749",
+		"_collection_link": "https://pemro-3-nodejs-tollo.postman.co/workspace/Pemro-3-NodeJS---TOLLO-Workspac~a6d309ac-7500-4c8f-8b60-6e7d4fa41d75/collection/15290749-4d1b9c13-536e-40dc-99ea-04b36bfde5cf?action=share&source=collection_link&creator=15290749"
 	},
 	"item": [
 		{
@@ -194,6 +195,67 @@
 					"path": [
 						"deleteDosen",
 						"666803c928279399ff97e0a9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nama\": \"ANTON\",\r\n    \"email\": \"anton@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:7000/register",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"anton@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:7000/login",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"login"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
 					]
 				}
 			},
